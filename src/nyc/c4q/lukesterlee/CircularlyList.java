@@ -50,12 +50,26 @@ public class CircularlyList {
         if (data.equals(head.data)) {
             head = head.next;
         }
-
-
+        Node walker = head;
+        while (walker.next != null && !walker.next.data.equals(data)) {
+            walker = walker.next;
+        }
+        if(walker.next != null) {
+            walker.next = walker.next.next;
+        }
     }
 
     public void insertAfter(String prevData, String newData) {
+        Node newNode = new Node(newData);
+        Node walker = head;
+        while (walker != null && !walker.data.equals(prevData)) {
+            walker = walker.next;
+        }
 
+        if (walker != null) {
+            newNode.next = walker.next;
+            walker.next = newNode;
+        }
     }
 
     public static void main(String[] args) {
